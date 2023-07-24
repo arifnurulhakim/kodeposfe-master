@@ -113,7 +113,7 @@ const wilayah = decodedWilayahArray.reverse().join('/'); // Balikkan array wilay
 console.log(wilayah);
 
         const kodepos = selectedKodepos.value;
-        if (wilayah === '') {
+        if (getwilayah === '') {
             if (kodepos.length !== 5 && kodepos.length !== 7 && kodepos.length !== 10) {
                 // Kode pos tidak sesuai dengan panjang yang diizinkan
                 const errorMessage = "Kode pos harus terdiri dari 5 digit untuk kodepos lama, 7 untuk kodepos baru, atau 10 digit untuk kodepos dagri.";
