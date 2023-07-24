@@ -92,10 +92,7 @@ import { useToast } from 'primevue/usetoast';
         <div>
           <h4>Kode Pos: ${properties.kode_pos}</h4>
           <h5>Kode dagri: ${properties.kode_dagri}</h5>
-          <p>Nama Desa: ${properties.nama_desa}</p>
-          <p>Nama Kecamatan: ${properties.nama_kecamatan}</p>
-          <p>Nama Kabupaten: ${properties.nama_kabupaten}</p>
-          <p>Nama Provinsi: ${properties.nama_provinsi}</p>
+          <h5>Nama Desa: ${properties.nama_desa}</h5>
         </div>
       `;
 
