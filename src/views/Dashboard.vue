@@ -156,7 +156,7 @@
                         <div class="text-900 font-medium text-xl">{{ jumlah.jumlah_provinsi }}</div>
                     </div>
                     <div class="flex align-items-center justify-content-center bg-blue-100 border-round" style="width: 2.5rem; height: 2.5rem">
-                        <i class="pi pi-shopping-cart text-blue-500 text-xl"></i>
+                        <i class="pi pi-map-marker text-blue-500 text-xl"></i>
                     </div>
                 </div>
             </div>
@@ -182,7 +182,7 @@
                         <div class="text-900 font-medium text-xl">{{ jumlah.jumlah_kecamatan }}</div>
                     </div>
                     <div class="flex align-items-center justify-content-center bg-cyan-100 border-round" style="width: 2.5rem; height: 2.5rem">
-                        <i class="pi pi-inbox text-cyan-500 text-xl"></i>
+                        <i class="pi pi-map-marker text-cyan-500 text-xl"></i>
                     </div>
                 </div>
             </div>
@@ -195,7 +195,7 @@
                         <div class="text-900 font-medium text-xl">{{ jumlah.jumlah_desa }}</div>
                     </div>
                     <div class="flex align-items-center justify-content-center bg-purple-100 border-round" style="width: 2.5rem; height: 2.5rem">
-                        <i class="pi pi-comment text-purple-500 text-xl"></i>
+                        <i class="pi pi-map-marker text-purple-500 text-xl"></i>
                     </div>
                 </div>
             </div>

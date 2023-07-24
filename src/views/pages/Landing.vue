@@ -606,11 +606,11 @@
     } */
 
     @media screen and (min-width: 768px) {
-        /* #hero {
+        #hero {
             -webkit-clip-path: ellipse(150% 87% at 93% 13%);
             clip-path: ellipse(150% 87% at 93% 13%);
             height: 530px;
-        } */
+        }
         #alamat{
             width: 500px; 
             border-radius: 100px;
@@ -632,8 +632,9 @@
     }
     @media screen and (max-width: 1300px) {
         #hero {
-            height: 600px;
-            width: 600px;
+            -webkit-clip-path: ellipse(150% 87% at 93% 13%);
+            clip-path: ellipse(150% 87% at 93% 13%);
+            height: 530px;
         }
         #hero>img {
             position: static;

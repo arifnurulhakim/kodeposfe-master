@@ -11,7 +11,7 @@ const logoUrl = computed(() => {
 
 <template>
     <div class="layout-footer">
-        <img src="/demo/images/login/logo2.png" alt="Logo" height="20" class="mr-2" />
+        <!-- <img src="/demo/images/login/logo2.png" alt="Logo" height="20" class="mr-2" /> -->
        
     </div>
 </template>

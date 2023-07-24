@@ -1,11 +1,14 @@
 <script setup>
+import { FilterMatchMode } from 'primevue/api';
+import { useToast } from 'primevue/usetoast';
+
   import {
     useLayout
   } from '@/layout/composables/layout';
   import {
     computed,
     ref,
-    onMounted
+    onMounted, onBeforeMount 
   } from 'vue';
   import {
     useRouter
@@ -13,6 +16,9 @@
   import axios from 'axios';
   import L from 'leaflet';
   import 'leaflet/dist/leaflet.css';
+
+
+  const toast = useToast();
   const {
     layoutConfig
   } = useLayout();
@@ -34,6 +40,10 @@
   const desas = ref(null);
   const datakodepos = ref({});
   const qrcode = ref(null);
+  const filters = ref({});
+  onBeforeMount(() => {
+  initFilters();
+});
   const getKodepos = async() => {
     try {
       let url = '';
@@ -59,9 +69,42 @@
       L.tileLayer('http://mt0.google.com/vt/lyrs=m&hl=id&x={x}&y={y}&z={z}', {
             attribution: 'Map data &copy; <a href="https://www.google.com/maps">GoogleMaps</a> contributors'
         }).addTo(map.value);
-      var geoJSONLayer = L.geoJSON().addTo(map.value);
+
+        const polygonStyle = {
+      color: 'black', // Mengatur warna garis menjadi hitam
+      weight: 2, // Mengatur ketebalan garis
+      opacity: 1, // Mengatur opacity garis (0 hingga 1)
+    };
+
+   var geoJSONLayer = L.geoJSON(geometry, {
+      style: polygonStyle, // Menetapkan style yang telah didefinisikan
+    }).addTo(map.value);
+      // var geoJSONLayer = L.geoJSON().addTo(map.value);
       var geometry = JSON.parse(response.data.geojson);
       geoJSONLayer.addData(geometry);
+      // Tambahkan event listener untuk 'click' pada lapisan GeoJSON
+    geoJSONLayer.eachLayer((layer) => {
+      // Ambil properti dari fitur saat ini
+      const properties = layer.feature.properties;
+
+      // Buat isi popup dengan properti yang diambil
+      const popupContent = `
+        <div>
+          <h4>Kode Pos: ${properties.kode_pos}</h4>
+          <h5>Kode dagri: ${properties.kode_dagri}</h5>
+          <p>Nama Desa: ${properties.nama_desa}</p>
+          <p>Nama Kecamatan: ${properties.nama_kecamatan}</p>
+          <p>Nama Kabupaten: ${properties.nama_kabupaten}</p>
+          <p>Nama Provinsi: ${properties.nama_provinsi}</p>
+        </div>
+      `;
+
+      // Tambahkan event listener 'click' pada layer
+      layer.on('click', () => {
+        // Tampilkan popup dengan isi konten yang telah dibuat
+        layer.bindPopup(popupContent).openPopup();
+      });
+    });
     } catch (error) {
       console.error(error);
     }
@@ -83,14 +126,25 @@
     });
   };
   const printQRCode = () => {
-    const qrcodeImg = qrcode.value;
-    const printWindow = window.open('', '', 'width=600,height=600');
-    printWindow.document.write('<html><head><title>QR Code</title></head><body>');
-    printWindow.document.write('<img src="data:image/;base64,' + qrcodeImg + '" style="width:100%;" />');
-    printWindow.document.write('</body></html>');
-    printWindow.document.close();
-    printWindow.print();
-  };
+  const qrcodeImg = qrcode.value;
+  const printWindow = window.open('', '', 'width=600,height=600');
+  printWindow.document.write('<html><head><title>QR Code</title></head><body>');
+  
+  // Menambahkan logo dan teks di atas gambar QR code
+  printWindow.document.write('<div style="text-align: center; padding: 10px;">');
+    printWindow.document.write('<img src="/demo/images/login/kominfoo.png" alt="logo" height="100px" class="mr-0 lg:mr-2" />');
+    printWindow.document.write('<div class="layout-topbar-content w-full">');
+  printWindow.document.write('<h4>KEMKOMINFO RI</h1>');
+  printWindow.document.write('<h5>Menuju Masyarakat Informasi Indonesia</h5>');
+  printWindow.document.write('</div>');
+  printWindow.document.write('</div>');
+  
+  printWindow.document.write(`<img src="data:image/;base64,${qrcodeImg}" style="width:100%;" />`);
+  printWindow.document.write('</body></html>');
+  printWindow.document.close();
+  printWindow.print();
+};
+
   const showDetail = (data) => {
     const kodepos = data.kode_new;
     router.push({
@@ -100,6 +154,11 @@
       }
     });
   };
+  const initFilters = () => {
+    filters.value = {
+        global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    };
+};
 </script>
 
 
@@ -170,13 +229,33 @@
       </div>
       <div class="py-4 px-4 mx-0 md:mx-8">
         <h2 class="text-900 font-normal mb-2">Daftar Desa/Kelurahan</h2>
-        <DataTable ref="dt" :value="desas" dataKey="id" :paginator="true" :rows="10" :filters="filters" paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[5, 10, 25]"
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} kabupatens" responsiveLayout="scroll">
+        <DataTable ref="dt"
+  :value="desas"
+  dataKey="id"
+  :paginator="true"
+  :rows="10" 
+  :filters="filters"
+  paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+  :rowsPerPageOptions="[5, 10, 25]"
+  :totalRecords="totalData"
+  :loading="loading"
+  :currentPageReportTemplate="'Showing {first} to {last} of ' + totalData + ' provinsis'"
+  :loadingIcon="loadingIcon"
+  responsiveLayout="scroll">
+  <template #header>
+                        <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Desa</h5>
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search" />
+                            <InputText v-model="filters['global'].value" placeholder="Search..." />
+                        </span>
+                        </div>
+                    </template>
           <Column field="kode_desa" header="kode Pos Baru" :sortable="true" headerStyle="width:40%; min-width:10rem;">
-            <template #body="slotProps">
+            <template #body="slotProps" >
                       <span class="p-column-title">Kode Pos Baru</span>
                       {{ slotProps.data.kode_new }}
-</template>
+    </template>
           </Column>
           <Column field="kode_desa" header="kode desa" :sortable="true" headerStyle="width:40%; min-width:10rem;">
 <template #body="slotProps">

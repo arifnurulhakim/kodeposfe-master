@@ -59,12 +59,22 @@
       } = response.data;
       // Create Leaflet map
       map.value = L.map('map').setView([latitude, longitude], 14);
-      L.tileLayer('http://mt0.google.com/vt/lyrs=m&hl=id&x={x}&y={y}&z={z}', {
-            attribution: 'Map data &copy; <a href="https://www.google.com/maps">GoogleMaps</a> contributors'
-        }).addTo(map.value);
-      const geoJSONLayer = L.geoJSON().addTo(map.value);
-      const geometry = JSON.parse(geojson);
-      geoJSONLayer.addData(geometry);
+    L.tileLayer('http://mt0.google.com/vt/lyrs=m&hl=id&x={x}&y={y}&z={z}', {
+      attribution: 'Map data &copy; <a href="https://www.google.com/maps">GoogleMaps</a> contributors',
+    }).addTo(map.value);
+
+    const geometry = JSON.parse(response.data.geojson);
+
+    // Define style for the polygon's outline (garis batas)
+    const polygonStyle = {
+      color: 'black', // Mengatur warna garis menjadi hitam
+      weight: 2, // Mengatur ketebalan garis
+      opacity: 1, // Mengatur opacity garis (0 hingga 1)
+    };
+
+    const geoJSONLayer = L.geoJSON(geometry, {
+      style: polygonStyle, // Menetapkan style yang telah didefinisikan
+    }).addTo(map.value);
     } catch (error) {
       console.error(error);
     }
@@ -86,14 +96,21 @@
     });
   };
   const printQRCode = () => {
-    const qrcodeImg = qrcode.value;
-    const printWindow = window.open('', '', 'width=600,height=600');
-    printWindow.document.write('<html><head><title>QR Code</title></head><body>');
-    printWindow.document.write(`<img src="data:image/;base64,${qrcodeImg}" style="width:100%;" />`);
-    printWindow.document.write('</body></html>');
-    printWindow.document.close();
-    printWindow.print();
-  };
+  const qrcodeImg = qrcode.value;
+  const printWindow = window.open('', '', 'width=600,height=600');
+  printWindow.document.write('<html><head><title>QR Code</title></head><body>');
+  
+  // Menambahkan logo di atas gambar QR code
+  printWindow.document.write('<div style="text-align: center; padding: 10px;">');
+  printWindow.document.write('<img src="/demo/images/login/kominfoo.png" alt="logo" height="50" class="mr-0 lg:mr-2" />');
+  printWindow.document.write('</div>');
+  
+  printWindow.document.write(`<img src="data:image/;base64,${qrcodeImg}" style="width:100%;" />`);
+  printWindow.document.write('</body></html>');
+  printWindow.document.close();
+  printWindow.print();
+};
+
 </script>
 
 

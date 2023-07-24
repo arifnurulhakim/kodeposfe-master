@@ -53,7 +53,7 @@ const login = async () => {
                 <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius: 53px">
                     <div class="text-center mb-5">
                         <img src="/demo/images/login/kominfoo.png" alt="Image" height="100" class="mb-3" />
-                        <h1>QKODE POS INDONESIA</h1>
+                        <h1>QR KODE POS</h1>
           <h5>silahkan masukan username dan password</h5>
                     </div>
 
