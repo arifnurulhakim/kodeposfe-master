@@ -106,7 +106,12 @@
         }
     };
     const submitForm = () => {
-        const wilayah = selectedWilayah.value;
+        const getwilayah = selectedWilayah.value;
+const wilayahArray = getwilayah.split(',%20'); // Pisahkan setiap bagian wilayah berdasarkan ',%20'
+const decodedWilayahArray = wilayahArray.map(part => decodeURIComponent(part)); // Decode setiap bagian wilayah
+const wilayah = decodedWilayahArray.reverse().join('/'); // Balikkan array wilayah dan gabungkan dengan '/'
+console.log(wilayah);
+
         const kodepos = selectedKodepos.value;
         if (wilayah === '') {
             if (kodepos.length !== 5 && kodepos.length !== 7 && kodepos.length !== 10) {

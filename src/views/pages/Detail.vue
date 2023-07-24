@@ -40,15 +40,21 @@
       const remainingURL = currentURL.slice(detailIndex);
       const letterCount = remainingURL.length;
       let url = '';
-      if (wilayah || letterCount > 10) {
-        const [desa, kecamatan, kabupaten, provinsi] = wilayah.split(',');
-        url = `/api/kode-pos/allprovinsi/${provinsi}/${kabupaten}/${kecamatan}/${desa}`;
-      } else if (kodepos || letterCount < 11) {
-        url = `/api/kode-pos/kodepos/${kodepos}`;
-      } else {
-        console.error('Invalid parameters');
-        return;
-      }
+      
+      if (kodepos || letterCount < 11) {
+      // Jika letterCount adalah 10, itu berarti URL mengandung kodepos (misal: /detail/12345)
+      const kodepos = remainingURL;
+
+      url = `/api/kode-pos/kodepos/${kodepos}`;
+    } else if(wilayah || letterCount > 10) {
+      // Jika letterCount lebih besar dari 10, itu berarti URL mengandung wilayah (misal: /detail/desa,kecamatan,kabupaten,provinsi)
+      const wilayah = remainingURL;
+      const [desa, kecamatan, kabupaten, provinsi] = wilayah.split(',');
+      url = `/api/kode-pos/allprovinsi/${provinsi}/${kabupaten}/${kecamatan}/${desa}`;
+    } else {
+      console.error('Invalid parameters');
+      return;
+    }
       const response = await axios.get(url);
       datakodepos.value = response.data.data;
       qrcode.value = response.data.qrcode;
