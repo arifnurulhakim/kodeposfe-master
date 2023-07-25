@@ -64,7 +64,7 @@
         geojson
       } = response.data;
       // Create Leaflet map
-      map.value = L.map('map').setView([latitude, longitude], 14);
+      map.value = L.map('map').setView([latitude, longitude], 12);
     L.tileLayer('http://mt0.google.com/vt/lyrs=m&hl=id&x={x}&y={y}&z={z}', {
       attribution: 'Map data &copy; <a href="https://www.google.com/maps">GoogleMaps</a> contributors',
     }).addTo(map.value);
