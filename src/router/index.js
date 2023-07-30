@@ -202,6 +202,11 @@ const router = createRouter({
             component: () => import('@/views/pages/Landing.vue')
         },
         {
+            path: '/map',
+            name: 'map',
+            component: () => import('@/views/pages/map.vue')
+        },
+        {
             path: '/detail/:wilayah',
             name: 'detail-location',
             component: () => import('@/views/pages/Detail.vue'),

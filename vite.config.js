@@ -1,20 +1,21 @@
-import { fileURLToPath, URL } from 'node:url';
+import { fileURLToPath, URL } from 'url'; // Change 'node:url' to 'url'
 
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 
-// https://vitejs.dev/config/
+// Obtain the directory name from the URL
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
+
 export default defineConfig(() => {
-    return {
-        plugins: [vue()],
-        resolve: {
-            alias: {
-                '@': fileURLToPath(new URL('./src', import.meta.url))
-            }
-        },
-        build: {
-            outDir: 'build'
-          }
-    };
-    
+  return {
+    plugins: [vue()],
+    resolve: {
+      alias: {
+        '@': `${__dirname}/src`, // Use __dirname to resolve the src path
+      },
+    },
+    build: {
+      outDir: 'build',
+    },
+  };
 });
