@@ -47,7 +47,7 @@
     };
     const getProvinsi = async() => {
         try {
-            const response = await axios.get('/api/allprovinsi');
+            const response = await axios.get('/api/allprovinsis');
             provinsiList.value = response.data.data.map(provinsi => provinsi.nama_provinsi);
         } catch (error) {
             console.error(error);
@@ -260,25 +260,26 @@
                     <p class="font-normal text-2xl line-height-3 md:mt-3 text-gray-700">Temukan informasi lengkap kode pos seluruh daerah Indonesia dengan mudah</p>
                     <div class="card pt-1 pb-1 pr-1 pl-1 inline-flex items-center justify-center h-auto rounded-full text-center" style="border-radius: 100px;">
                         <!-- <input type="text" placeholder="Alamat" id="alamat" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center" > -->
-                        <input type="text" list="provinsiOptions" v-model="selectedProvinsi" @input="onProvinsiChange" placeholder="Provinsi" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center" style="border-radius: 100px;" />
+                        <input type="text" list="provinsiOptions" v-model="selectedProvinsi" @input="onProvinsiChange" :disabled="selectedWilayah !== ''||selectedKodepos !== ''" placeholder="Provinsi" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center" style="border-radius: 100px;" />
                         <datalist id="provinsiOptions">
             <option v-for="provinsi in provinsiList" :value="provinsi" :key="provinsi">
               {{ provinsi }}
             </option>
           </datalist>
-                        <input type="text" list="kabupatenOptions" v-model="selectedKabupaten" @input="getKecamatan" placeholder="Kabupaten" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center" style="border-radius: 100px;">
+                        <input type="text" list="kabupatenOptions" v-model="selectedKabupaten" @input="getKecamatan" :disabled="selectedWilayah !== ''||selectedKodepos !== ''" placeholder="Kabupaten" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center" style="border-radius: 100px;">
                         <datalist id="kabupatenOptions">
                         <option v-for="kabupaten in kabupatenList" :value="kabupaten">{{ kabupaten }}</option>
                     </datalist>
-                        <input type="text" list="kecamatanOptions" v-model="selectedKecamatan" @input="getDesa" placeholder="Kecamatan" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center" style="border-radius: 100px;">
+                        <input type="text" list="kecamatanOptions" v-model="selectedKecamatan" @input="getDesa" :disabled="selectedWilayah !== ''||selectedKodepos !== ''" placeholder="Kecamatan" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center" style="border-radius: 100px;">
                         <datalist id="kecamatanOptions">
                         <option v-for="kecamatan in kecamatanList" :value="kecamatan">{{ kecamatan }}</option>
                     </datalist>
-                        <input type="text" list="desaOptions" v-model="selectedDesa" placeholder="Desa" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center" style="border-radius: 100px;">
+                        <input type="text" list="desaOptions" v-model="selectedDesa" :disabled="selectedWilayah !== ''||selectedKodepos !== ''" placeholder="Desa" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center" style="border-radius: 100px;">
                         <datalist id="desaOptions">
                         <option v-for="desa in desaList" :value="desa">{{ desa }}</option>
                     </datalist>
-                        <input type="text" list="wilayahOptions" v-model="selectedWilayah" @input="onWilayahChange" :disabled="selectedProvinsi !== ''" placeholder="Wilayah" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center" style="border-radius: 100px;"
+                    <br>
+                        <input type="text" list="wilayahOptions" v-model="selectedWilayah" @input="onWilayahChange" :disabled="selectedProvinsi !== ''||selectedKodepos !== ''" placeholder="Wilayah" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center" style="border-radius: 100px;"
                         />
                         <datalist id="wilayahOptions">
             <option v-for="wilayah in wilayahList" :value="wilayah" :key="wilayah">
