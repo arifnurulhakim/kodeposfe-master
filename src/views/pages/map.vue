@@ -2,7 +2,7 @@
   <!-- Header -->
 
     <div class="py-4 px-8 mx-0  flex align-items-center justify-content-between relative lg:static mb-3" style="background-color: white;">
-                <a class="flex align-items-center w-full" :href="logoUrl">
+                <a class="flex align-items-center w-full" @click="redirectToHome">
                     <img src="/demo/images/login/kominfoo.png" alt="logo" height="50" class="mr-0 lg:mr-2" />
                     <div class="layout-topbar-content w-full">
                         <h1>KEMKOMINFO RI</h1>
