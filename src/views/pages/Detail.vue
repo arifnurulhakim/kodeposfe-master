@@ -199,15 +199,33 @@
             <tr class="even-bg">
                 <td class="font-bold px-2 py-3">Kota</td>
                 <td class="px-2 py-3">{{ datakodepos.nama_kabupaten }}</td>
-                <!-- Tambahkan sel kosong untuk kolom sampingnya -->
-                <td class="font-bold px-2 py-3"></td>
+                <td class="font-bold px-2 py-3">Jumlah Menera Seluler</td>
+                <td class="px-2 py-3">{{ datakodepos.jumlah_bts }}</td>
                 <td class="px-2 py-3"></td>
             </tr>
             <tr class="odd-bg">
                 <td class="font-bold px-2 py-3">Provinsi</td>
                 <td class="px-2 py-3">{{ datakodepos.nama_provinsi }}</td>
-                <!-- Tambahkan sel kosong untuk kolom sampingnya -->
+                <td class="font-bold px-2 py-3">Jumlah Operator</td>
+                <td class="px-2 py-3">{{ datakodepos.jumlah_operator }}</td>
+                <td class="px-2 py-3"></td>
+            </tr>
+            <tr class="odd-bg">
+               <!-- Tambahkan sel kosong untuk kolom sampingnya -->
+               <td class="font-bold px-2 py-3"></td>
+                <td class="px-2 py-3"></td>
+
+                <td class="font-bold px-2 py-3">Jumlah Kantor Pos</td>
+                <td class="px-2 py-3">{{ datakodepos.jumlah_kantor_pos }}</td>
+                <td class="px-2 py-3"></td>
+            </tr>
+            <tr class="odd-bg">
+               <!-- Tambahkan sel kosong untuk kolom sampingnya -->
                 <td class="font-bold px-2 py-3"></td>
+                <td class="px-2 py-3"></td>
+
+                <td class="font-bold px-2 py-3">Jumlah Kurir Logistik</td>
+                <td class="px-2 py-3">{{ datakodepos.jumlah_kurlog }}</td>
                 <td class="px-2 py-3"></td>
             </tr>
         </tbody>

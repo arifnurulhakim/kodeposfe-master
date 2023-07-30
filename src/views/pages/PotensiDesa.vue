@@ -258,6 +258,31 @@
     {{ slotProps.data.jumlah_industri_kecil }}
 </template>
 </Column>
+<Column field="jumlah_bts" header="Jumlah Menara Seluler" :sortable="true" headerStyle="width:70%; min-width:10rem;">
+<template #body="slotProps">
+    <span class="p-column-title">Jumlah Menara Seluler</span>
+    {{ slotProps.data.jumlah_bts }}
+</template>
+</Column>
+<Column field="jumlah_operator" header="Jumlah Operator" :sortable="true" headerStyle="width:70%; min-width:10rem;">
+<template #body="slotProps">
+    <span class="p-column-title">Jumlah Operator</span>
+    {{ slotProps.data.jumlah_operator }}
+</template>
+</Column>
+<Column field="jumlah_kantor_pos" header="Jumlah Kantor Pos" :sortable="true" headerStyle="width:70%; min-width:10rem;">
+  <template #body="slotProps">
+    <span class="p-column-title">Jumlah Kantor Pos</span>
+    {{ slotProps.data.jumlah_kantor_pos }}
+  </template>
+</Column>
+<Column field="jumlah_kurlog" header="Jumlah Kurlog" :sortable="true" headerStyle="width:70%; min-width:10rem;">
+  <template #body="slotProps">
+    <span class="p-column-title">Jumlah Kurlog</span>
+    {{ slotProps.data.jumlah_kurlog }}
+  </template>
+</Column>
+
 
                     <Column headerStyle="min-width:10rem;">
 <template #body="slotProps">
@@ -299,6 +324,27 @@
     <InputText id="jumlah_industri_kecil" v-model.trim="potensidesa.jumlah_industri_kecil" required="true" autofocus :class="{ 'p-invalid': submitted && !potensidesa.jumlah_industri_kecil }" />
     <small class="p-invalid" v-if="submitted && !potensidesa.jumlah_industri_kecil">Jumlah Industri Kecil is required.</small>
   </div>
+  <div class="field">
+  <label for="jumlah_bts">Jumlah BTS</label>
+  <InputText id="jumlah_bts" v-model.trim="potensidesa.jumlah_bts" required="true" autofocus :class="{ 'p-invalid': submitted && !potensidesa.jumlah_bts }" />
+  <small class="p-invalid" v-if="submitted && !potensidesa.jumlah_bts">Jumlah BTS is required.</small>
+</div>
+<div class="field">
+  <label for="jumlah_operator">Jumlah Operator</label>
+  <InputText id="jumlah_operator" v-model.trim="potensidesa.jumlah_operator" required="true" autofocus :class="{ 'p-invalid': submitted && !potensidesa.jumlah_operator }" />
+  <small class="p-invalid" v-if="submitted && !potensidesa.jumlah_operator">Jumlah Operator is required.</small>
+</div>
+<div class="field">
+  <label for="jumlah_kantor_pos">Jumlah Kantor Pos</label>
+  <InputText id="jumlah_kantor_pos" v-model.trim="potensidesa.jumlah_kantor_pos" required="true" autofocus :class="{ 'p-invalid': submitted && !potensidesa.jumlah_kantor_pos }" />
+  <small class="p-invalid" v-if="submitted && !potensidesa.jumlah_kantor_pos">Jumlah Kantor Pos is required.</small>
+</div>
+<div class="field">
+  <label for="jumlah_kurlog">Jumlah Kurlog</label>
+  <InputText id="jumlah_kurlog" v-model.trim="potensidesa.jumlah_kurlog" required="true" autofocus :class="{ 'p-invalid': submitted && !potensidesa.jumlah_kurlog }" />
+  <small class="p-invalid" v-if="submitted && !potensidesa.jumlah_kurlog">Jumlah Kurlog is required.</small>
+</div>
+
 <template #footer>
     <Button label="Cancel" icon="pi pi-times" class="p-button-text" @click="hideDialog" />
     <Button label="Save" icon="pi pi-check" class="p-button-text" @click="savePotensidesa" />

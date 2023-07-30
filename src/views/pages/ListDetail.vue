@@ -90,9 +90,10 @@ import { useToast } from 'primevue/usetoast';
       // Buat isi popup dengan properti yang diambil
       const popupContent = `
         <div>
-          <h4>Kode Pos: ${properties.kode_pos}</h4>
-          <h5>Kode dagri: ${properties.kode_dagri}</h5>
-          <h5>Nama Desa: ${properties.nama_desa}</h5>
+          <h5>Desa ${properties.nama_desa}</h5>
+          <p>Kode Pos: ${properties.kode_pos}<p>
+          <p>Kode dagri: ${properties.kode_dagri}</p>
+        
         </div>
       `;
 
