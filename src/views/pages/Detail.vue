@@ -73,10 +73,10 @@
 
     // Define style for the polygon's outline (garis batas)
     const polygonStyle = {
-      color: 'black', // Mengatur warna garis menjadi hitam
-      weight: 2, // Mengatur ketebalan garis
-      opacity: 1, // Mengatur opacity garis (0 hingga 1)
-    };
+  color: 'black', // Mengatur warna garis menjadi hitam
+  weight: 1, // Mengatur ketebalan garis
+  fillOpacity: 0, // Mengatur opacity isi poligon menjadi 0 (transparan)
+};
 
     const geoJSONLayer = L.geoJSON(geometry, {
       style: polygonStyle, // Menetapkan style yang telah didefinisikan
