@@ -30,6 +30,7 @@
     const kecamatanList = ref([]);
     const desaList = ref([]);
     const kodeposList = ref([]);
+    const filteredWilayahList = ref([]);
     const smoothScroll = (id) => {
         document.querySelector(id).scrollIntoView({
             behavior: 'smooth'
@@ -66,6 +67,19 @@
             console.error(error);
         }
     };
+
+    const filterWilayahList = () => {
+  const inputWilayah = selectedWilayah.value.toLowerCase().trim();
+  if (!inputWilayah) {
+    // Jika input kosong, tampilkan seluruh wilayah
+    filteredWilayahList.value = wilayahList.value;
+  } else {
+    // Jika input tidak kosong, filter wilayah berdasarkan input
+    filteredWilayahList.value = wilayahList.value.filter(wilayah =>
+      wilayah.toLowerCase().includes(inputWilayah)
+    );
+  }
+};
     const getKodepos = async() => {
         try {
             const response = await axios.get(`/api/kode-pos/allprovinsi/${selectedKodepos.value}`);
@@ -292,10 +306,10 @@
                             <option v-for="desa in desaList" :value="desa">{{ desa }}</option>
                         </datalist>
                         <br>
-                        <input type="text" list="wilayahOptions" v-model="selectedWilayah" @input="onWilayahChange" :disabled="selectedProvinsi !== ''||selectedKodepos !== ''" placeholder="Wilayah" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center"
+                        <input  type="text" list="wilayahOptions" v-model="selectedWilayah" @input="filterWilayahList" :disabled="selectedProvinsi !== ''||selectedKodepos !== ''" placeholder="Wilayah" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center"
                             style="border-radius: 100px;" />
                         <datalist id="wilayahOptions">
-                <option v-for="wilayah in wilayahList" :value="wilayah" :key="wilayah">
+                <option v-for="wilayah in filteredWilayahList" :value="wilayah" :key="wilayah">
                   {{ wilayah }}
                 </option>
               </datalist>

@@ -28,7 +28,7 @@
                 </li> -->
                     </ul>
                     <div class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
-                        <Button label="Login" :onClick="redirectToLogin" class="p-button-rounded border-none ml-5 font-light text-white line-height-2 bg-blue-500"></Button>
+                        <Button label="Login" @click="redirectToHome" class="p-button-rounded border-none ml-5 font-light text-white line-height-2 bg-blue-500"></Button>
                         <!-- <Button label="Register" :onClick="redirectToRegister" class="p-button-rounded border-none ml-5 font-light text-white line-height-2 bg-blue-500"></Button> -->
                     </div>
                 </div>
@@ -74,6 +74,10 @@
       redirectToHome() {
       // Assuming you are using Vue Router, you can navigate to the "landing" route
       this.$router.push({ name: 'landing' });
+    },
+      redirectToLogin() {
+      // Assuming you are using Vue Router, you can navigate to the "landing" route
+      this.$router.push({ name: 'login' });
     },
       initializeMap() {
         const attribution = new Attribution({
