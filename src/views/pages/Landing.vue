@@ -118,6 +118,20 @@
         const getprovinsi = selectedProvinsi.value;
         const kodepos = selectedKodepos.value;
         const getwilayah = selectedWilayah.value;
+        if (
+        !getkodepos &&
+        !getdesa &&
+        !getkecamatan &&
+        !getkabupaten &&
+        !getprovinsi &&
+        !kodepos &&
+        !getwilayah
+      ) {
+        // All variables are empty
+        alert('Silahkan isi terlebih dahulu');
+        return;
+      }
+
         if (getkodepos) {
             if (kodepos.length !== 5 && kodepos.length !== 7 && kodepos.length !== 10) {
                 // Kode pos tidak sesuai dengan panjang yang diizinkan
@@ -618,7 +632,7 @@
             </div>
         </div>
     </div>
-    <AppConfig simple />
+    <!-- <AppConfig simple /> -->
 </template>
 
 <style scoped>
