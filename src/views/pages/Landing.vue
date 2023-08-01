@@ -282,39 +282,44 @@
                 <div class="mx-4 md:mx-8 mt-0 md:mt-4">
                     <h1 class="text-6xl font-bold text-gray-900 line-height-2"><span class="font-light block"></span>Kode Pos Indonesia</h1>
                     <p class="font-normal text-2xl line-height-3 md:mt-3 text-gray-700">Temukan informasi lengkap kode pos seluruh daerah Indonesia dengan mudah</p>
-                    <div class="card pt-1 pb-1 pr-1 pl-1 inline-flex items-center justify-center h-auto rounded-full text-center" style="border-radius: 100px;">
+                    <div class="card pt-1 pb-1 pr-1 pl-1 inline-flex items-center justify-center h-auto rounded-full text-center " style="border-radius: 100px;">
                         <!-- <input type="text" placeholder="Alamat" id="alamat" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center" > -->
-                        <input type="text" list="provinsiOptions" v-model="selectedProvinsi" @input="onProvinsiChange" :disabled="selectedWilayah !== ''||selectedKodepos !== ''" placeholder="Provinsi" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center"
-                            style="border-radius: 100px;" />
+                        <input type="text" list="provinsiOptions" v-model="selectedProvinsi" @input="onProvinsiChange" :disabled="selectedWilayah !== ''||selectedKodepos !== ''" placeholder="Provinsi" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center pt-2 pb-2 "
+                            style="border-radius: 100px;"  id="selectform"/>
                         <datalist id="provinsiOptions">
                 <option v-for="provinsi in provinsiList" :value="provinsi" :key="provinsi">
                   {{ provinsi }}
                 </option>
               </datalist>
-                        <input type="text" list="kabupatenOptions" v-model="selectedKabupaten" @input="getKecamatan" :disabled="selectedWilayah !== ''||selectedKodepos !== ''" placeholder="Kabupaten" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center"
-                            style="border-radius: 100px;">
+                        <input type="text" list="kabupatenOptions" v-model="selectedKabupaten" @input="getKecamatan" :disabled="selectedWilayah !== ''||selectedKodepos !== ''" placeholder="Kabupaten" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center  pt-2 pb-2 "
+                            style="border-radius: 100px;" id="selectform">
                         <datalist id="kabupatenOptions">
                             <option v-for="kabupaten in kabupatenList" :value="kabupaten">{{ kabupaten }}</option>
                         </datalist>
-                        <input type="text" list="kecamatanOptions" v-model="selectedKecamatan" @input="getDesa" :disabled="selectedWilayah !== ''||selectedKodepos !== ''" placeholder="Kecamatan" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center"
-                            style="border-radius: 100px;">
+                        <input type="text" list="kecamatanOptions" v-model="selectedKecamatan" @input="getDesa" :disabled="selectedWilayah !== ''||selectedKodepos !== ''" placeholder="Kecamatan" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center  pt-2 pb-2 "
+                            style="border-radius: 100px;" id="selectform">
                         <datalist id="kecamatanOptions">
                             <option v-for="kecamatan in kecamatanList" :value="kecamatan">{{ kecamatan }}</option>
                         </datalist>
-                        <input type="text" list="desaOptions" v-model="selectedDesa" :disabled="selectedWilayah !== ''||selectedKodepos !== ''" placeholder="Desa" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center" style="border-radius: 100px;">
+                        <input type="text" list="desaOptions" v-model="selectedDesa" :disabled="selectedWilayah !== ''||selectedKodepos !== ''" placeholder="Desa" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center  pt-2 pb-2 " style="border-radius: 100px;">
                         <datalist id="desaOptions">
                             <option v-for="desa in desaList" :value="desa">{{ desa }}</option>
                         </datalist>
-                        <br>
+                        <!-- <Button hidden class="p-button-rounded text-xl border-none m-0 bg-blue-500 font-normal text-white line-height-3 px-3" @click="submitForm"><i class="pi pi-search" style="font-size: 2rem"></i> </Button> -->
+
+                        <!-- <div class="vertical-divider" style="margin-right: 10px;"></div> -->
+</div>
+                    <div class="card pt-1 pb-1 pr-1 pl-1 inline-flex items-center justify-center h-auto rounded-full text-center" style="border-radius: 100px;">
+
                         <input  type="text" list="wilayahOptions" v-model="selectedWilayah" @input="filterWilayahList" :disabled="selectedProvinsi !== ''||selectedKodepos !== ''" placeholder="Wilayah" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center"
-                            style="border-radius: 100px;" />
+                            style="border-radius: 100px;"  id="wilayah"/>
                         <datalist id="wilayahOptions">
                 <option v-for="wilayah in filteredWilayahList" :value="wilayah" :key="wilayah">
                   {{ wilayah }}
                 </option>
               </datalist>
                         <input type="text" v-model="selectedKodepos" :disabled="selectedWilayah !== '' || selectedProvinsi !== ''" placeholder="Kode Pos" class="border-none m-0 font-normal line-height-3 m-1 p-0 rounded-full text-center" style="border-radius: 100px;" maxlength="10"
-                        />
+                        id="kodepos"/>
                         <Button class="p-button-rounded text-xl border-none m-0 bg-blue-500 font-normal text-white line-height-3 px-3" @click="submitForm"><i class="pi pi-search" style="font-size: 2rem"></i> </Button>
                     </div>
                 </div>
@@ -656,6 +661,19 @@
         /* Change color to your preference */
         font-size: 20px;
     }
+     /* Custom CSS for the vertical separator line */
+  .vertical-divider {
+    position: relative;
+  }
+
+  .vertical-divider::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    border-left: 1px solid #000; /* You can adjust the color and thickness of the line here */
+  }
     /* #hero {
                         background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, #eeefaf 0%, #c3e3fa 100%);
                         height: 700px;
@@ -667,8 +685,12 @@
             clip-path: ellipse(150% 87% at 93% 13%);
             height: relative;
         }
-        #alamat {
-            width: 500px;
+        #selectform {
+            width: 150px;
+            border-radius: 100px;
+        }
+        #wilayah {
+            width: 400px;
             border-radius: 100px;
         }
         #bg-img {
@@ -706,7 +728,7 @@
             width: 100%;
             max-width: 100%;
         }
-        #alamat {
+        #selectform {
             width: 100px;
             border-radius: 100px;
         }
