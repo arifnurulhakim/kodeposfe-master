@@ -102,21 +102,30 @@
     });
   };
   const printQRCode = () => {
-  const qrcodeImg = qrcode.value;
+const qrcodeImg = qrcode.value;
   const printWindow = window.open('', '', 'width=600,height=600');
   printWindow.document.write('<html><head><title>QR Code</title></head><body>');
-  
-  // Menambahkan logo di atas gambar QR code
-  printWindow.document.write('<div style="text-align: center; padding: 10px;">');
-  printWindow.document.write('<img src="/demo/images/login/kominfoo.png" alt="logo" height="50" class="mr-0 lg:mr-2" />');
+
+  // Your original HTML content
+  printWindow.document.write('<div style="width: 833px; height: 804px; position: relative">');
+  printWindow.document.write('<div style="left: 70px; top: 714px; position: absolute; color: #323248; font-size: 20px; font-family: Arial Rounded MT Bold; font-weight: 400; word-wrap: break-word">Dicetak oleh :   PT Pos Indonesia</div>');
+  printWindow.document.write('<div style="width: 833px; height: 804px; left: 0px; top: 0px; position: absolute; background: #FEFEFE"></div>');
+  printWindow.document.write('<div style="left: 145px; top: 117px; position: absolute; color: #323248; font-size: 48px; font-family: Arial Rounded MT Bold; font-weight: 400; word-wrap: break-word">QR Kode Pos Indonesia</div>');
+  printWindow.document.write('<div style="width: 629px; height: 527px; left: 145px; top: 199px; position: absolute">');
+  printWindow.document.write('<div style="left: 53px; top: 0px; position: absolute; color: #323248; font-size: 16px; font-family: Arial Rounded MT Bold; font-weight: 400; word-wrap: break-word">Scan disini untuk mendapatkan informasi lengkap kode pos</div>');
+  printWindow.document.write('<div style="left: 0px; top: 508px; position: absolute; color: #323248; font-size: 16px; font-family: Arial Rounded MT Bold; font-weight: 400; word-wrap: break-word">Dicetak oleh:</div>');
+  printWindow.document.write('<div style="width: 100px; height: 100px; left: 529px; top: 407px; position: absolute"></div>');
   printWindow.document.write('</div>');
-  
-  printWindow.document.write(`<img src="data:image/;base64,${qrcodeImg}" style="width:100%;" />`);
+  printWindow.document.write(`<img style="width: 428px; height: 428px; left: 213px; top: 244px; position: absolute" src="data:image/;base64,${qrcodeImg}" />`);
+  printWindow.document.write('<img style="width: 383px; height: 94px; left: 59px; top: 23px; position: absolute"  src="/demo/images/login/banner.png" />');
+  printWindow.document.write('<img style="width: 88px; height: 82px; left: 4px; top: 3px; position: absolute" src="/demo/images/login/p1.png" />');
+  printWindow.document.write('<img style="width: 229px; height: 214px; left: 594px; top: 577px; position: absolute" src="/demo/images/login/p2.png" />');
+  printWindow.document.write('</div>');
+
   printWindow.document.write('</body></html>');
   printWindow.document.close();
   printWindow.print();
 };
-
 </script>
 
 
