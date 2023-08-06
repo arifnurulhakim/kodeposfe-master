@@ -123,7 +123,7 @@ import { useToast } from 'primevue/usetoast';
       name: 'login'
     });
   };
-  const printQRCode = () => {
+const printQRCode = () => {
 const qrcodeImg = qrcode.value;
   const printWindow = window.open('', '', 'width=600,height=600');
   printWindow.document.write('<html><head><title>QR Code</title></head><body>');
@@ -147,6 +147,7 @@ const qrcodeImg = qrcode.value;
   printWindow.document.write('</body></html>');
   printWindow.document.close();
   printWindow.print();
+};
 
   const showDetail = (data) => {
     const kodepos = data.kode_new;
